@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ProgrammingPractice_L19.Views.JarCatchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ProgrammingPractice_L19.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="Beige">
+            <Grid Grid.Row="0" Grid.Column="0"
+                Margin="5" Background="Bisque">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Поиск наивысшего улова по дате" Grid.ColumnSpan="2"
+                        FontWeight="Bold" FontSize="30" Margin="0 5 0 0"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                    <TextBlock Text="Начальная дата" Margin="3"/>
+                    <DatePicker SelectedDate="{Binding DatePickerStartDate}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                    <TextBlock Text="Конечная дата" Margin="3"/>
+                    <DatePicker SelectedDate="{Binding DatePickerEndDate}" FontSize="16"/>
+                </StackPanel>
+                <Button Grid.ColumnSpan="2" Grid.Row="2" MaxWidth="150" Margin="5"
+                     Content="Подтвердить" Foreground="Bisque"
+                     Command="{Binding ShowCatchByCommand}"></Button>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Background="Beige" >
+            <DataGrid ItemsSource="{Binding AverageCatch}" Background="Bisque"
+                   AutoGenerateColumns="False"
+                   CanUserAddRows="False" FontSize="16"
+                   RowBackground="Beige"
+                   AlternatingRowBackground="BurlyWood" Margin="5"
+                   IsReadOnly="True"
+                   SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Банка" Binding="{Binding JarName}" Width="*"/>
+                    <DataGridTextColumn Header="Средний улов" Binding="{Binding AverageCatch}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

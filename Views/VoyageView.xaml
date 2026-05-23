@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="ProgrammingPractice_L19.Views.VoyageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProgrammingPractice_L19.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="Beige">
+            <DockPanel Grid.Row="0" Grid.Column="0"
+                   Margin="5" LastChildFill="False" Background="Bisque">
+                <TextBlock Text="База рейсов" DockPanel.Dock="Top"
+                           FontWeight="Bold" FontSize="30" Margin="0 5 0 0"/>
+
+                <TextBox Margin="10 10 30 10" DockPanel.Dock="Top"/>
+
+                <Button DockPanel.Dock="Right" Margin="5 0 30 15" Content="Добавить +"
+                        MinHeight="30" Foreground="Bisque"
+                        Command="{Binding StartAddingCommand}"/>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Background="Beige" >
+            <DataGrid ItemsSource="{Binding Voyages}" Background="Bisque"
+                      SelectedItem="{Binding SelectedVoyage}" AutoGenerateColumns="False"
+                      CanUserAddRows="False" FontSize="16"
+                      RowBackground="Beige"
+                      AlternatingRowBackground="BurlyWood" Margin="5"
+                      SelectionMode="Single" SelectionChanged="DataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер рейса" Binding="{Binding VoyageNumber}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Имя катера" Binding="{Binding CurrentBoat.Name}"
+                                        Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Дата начала" Binding="{Binding StartDate,
+                                        Converter={StaticResource DateToString}}" Width="*"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Дата конца" Binding="{Binding EndDate,
+                                        Converter={StaticResource DateToString}}" Width="*"
+                                        IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="Команда" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Fishermen}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="Aquamarine">
+                                                <TextBlock>
+                                                    <Run Text="{Binding Fisherman.FullName}"/>
+                                                    <Run Text="{Binding Fisherman.JobTitle, StringFormat=({0})}"/>
+                                                </TextBlock>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDown" Handler="DataGridRow_MouseDown"/>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.RowSpan="2" Background="Beige" Width="350">
+            <DockPanel Margin="5" Background="Bisque" LastChildFill="False">
+                <TextBlock Text="{Binding Title}" FontSize="25"
+                       DockPanel.Dock="Top" Margin="10" FontWeight="Black"/>
+                <Separator Margin="5" Background="BlueViolet" DockPanel.Dock="Top" Height="6"/>
+                <StackPanel Margin="3" DockPanel.Dock="Top">
+                    <TextBlock Text="Номер рейса" FontSize="14"/>
+                    <TextBox Text="{Binding TextBoxVoyageNumber}"/>
+                </StackPanel>
+                <StackPanel Margin="3" DockPanel.Dock="Top">
+                    <TextBlock Text="Катер" FontSize="14"/>
+                    <ComboBox ItemsSource="{Binding FreeBoats}"
+                              SelectedItem="{Binding SelectedBoat}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Name}"></Run>
+                                    <Run Text="{Binding Type, StringFormat=- {0}}"></Run>
+                                    <Run Text="{Binding Displacement, StringFormat=({0} м куб.)}"></Run>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="3" DockPanel.Dock="Top">
+                    <TextBlock Text="Команда" FontSize="14"/>
+                    <Expander MaxHeight="250" Background="Beige"
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <DockPanel LastChildFill="False" Background="Beige">
+                            <TextBlock DockPanel.Dock="Top" Text="Добавленные члены" FontSize="14"/>
+                            <ListBox DockPanel.Dock="Top" MaxHeight="100"
+                                     ScrollViewer.CanContentScroll="True"
+                                     ItemsSource="{Binding VoyageFishermen}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <EventSetter Event="MouseLeftButtonUp"
+                                                     Handler="ListBoxItemFishermen_MouseLeftButtonUp"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap">
+                                                <Run Text="{Binding FullName}"/>
+                                                <Run Text="{Binding JobTitle, StringFormat=({0})}"/>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <TextBlock DockPanel.Dock="Top"
+                                       Text="Доступные рыбаки" FontSize="14"/>
+                            <ListBox DockPanel.Dock="Top" MaxHeight="100"
+                                     ScrollViewer.CanContentScroll="True"
+                                     ItemsSource="{Binding VoyageAllFishermen}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <EventSetter Event="MouseLeftButtonUp"
+                                                     Handler="ListBoxItemAllFishermen_MouseLeftButtonUp"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap">
+                                                <Run Text="{Binding FullName}"/>
+                                                <Run Text="{Binding JobTitle, StringFormat=({0})}"/>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                    </Expander>
+                </StackPanel>
+                <StackPanel Margin="3" DockPanel.Dock="Top">
+                    <TextBlock Text="Дата начала" FontSize="14"/>
+                    <DatePicker SelectedDate="{Binding DatePickerStartDate}"/>
+                </StackPanel>
+                <Button Content="{Binding ButtonCaption}" DockPanel.Dock="Top"
+                    Foreground="Bisque" Margin="5"
+                    Command="{Binding ApplyOperationCommand}"/>
+                <Button Content="Удалить" DockPanel.Dock="Bottom" Margin="10"
+                    Visibility="{Binding SelectedVoyage,
+                                Converter={StaticResource NullToVis}}"
+                    Command="{Binding RemoveCommand}"
+                    Background="Crimson"/>
+                <Button Content="Завершить рейс" DockPanel.Dock="Bottom" Margin="10"
+                        Visibility="{Binding SelectedVoyage,
+                                Converter={StaticResource NullToVis}}"
+                        Command="{Binding FinishVoyageCommand}"
+                        Background="Teal"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
