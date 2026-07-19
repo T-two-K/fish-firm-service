@@ -30,8 +30,21 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
 ## 📂 Installation
 1. Clone repositrory to your local machine.
 2. If you don't have app "MySQL Workbench" you can load it here: [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) (if you have any DBMS just skip this step).
-3. Setting up a connection string:
-   3.1. Open file appsettings.json;
-   3.2. In the quotes (after "DefaultConnection":) write the following string: "Server=localhost;database=yourdbname;pwd=yourpassword;uid=root;port=3306;" (don't forget to enter your data)
-   3.3. 
+3. Setting up a connection string:  
+   3.1. Open file appsettings.json;  
+   3.2. In the quotes (after "DefaultConnection":) write the following string: "Server=localhost;database=yourdbname;pwd=yourpassword;uid=root;port=3306;" (don't forget to enter your data).  
+   3.3. If you have another database, than enter connection string for your provider (you can find it in the internet).  
+   3.4. And then save file.  
+4. Now we should complete migrations:  
+   4.1. Open project in powershell or Visual Studio.  
+   4.2. Complete following command:  
+      - dotnet tool install --global dotnet-ef  
+      - dotnet-ef database update
+   4.3. If previous command finished with an error than try to write: _dotnet add package Microsoft.EntityFrameworkCore.Design_
+5. If all the previous steps were completed successfully, now all we have to do is launch our application using the following commands:
+   ```bash
+   dotnet restore
+   dotnet build
+   dotnet run
+   ```
 ## 🏛️ Application UI
