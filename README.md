@@ -21,3 +21,12 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
 - Provide the ability to add a new boat;
 - For the specified type of fish and jar, display a list of voyages indicating the quantity of fish caught.
 ## 📚 What I have learned
+- Learned how to create complex database queries using Linq;
+- I learned how to work with asynchronous methods and understood the basic operation of this technology (async/await);
+- Set up a database using Entity Framework Core (the method OnModelCreating);
+- Studied the DTO and Repository patterns;
+- I learned how to create databases from scratch using a task description;
+- Repeated work with the MVVM pattern.
+## 📂 Installation
+
+## 🏛️ Application UI
