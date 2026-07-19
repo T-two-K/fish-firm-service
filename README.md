@@ -45,6 +45,8 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
    4.3. If previous command finished with an error than try to write: _dotnet add package Microsoft.EntityFrameworkCore.Design_
 6. If all the previous steps were completed successfully, now all we have to do is launch our application using the following commands:
    ```bash
+      winget install Microsoft.DotNet.SDK.10
+      cd fish-firm-service #(or full path to this folder, for example: C:/Users/user123/fish-firm-service)
       dotnet restore
       dotnet build
       dotnet run
