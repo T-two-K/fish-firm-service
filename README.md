@@ -22,10 +22,10 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
 - For the specified type of fish and jar, display a list of voyages indicating the quantity of fish caught.
 ## 📚 What I have learned
 - Learned how to create complex database queries using Linq;
-- I learned how to work with asynchronous methods and understood the basic operation of this technology (async/await);
-- Set up a database using Entity Framework Core (the method OnModelCreating);
-- Studied the DTO and Repository patterns;
-- I learned how to create databases from scratch using a task description;
+- Learned how to work with asynchronous methods and understood the basic operation of this technology (async/await);
+- Learned how to create databases from scratch using a task description;
+- Learned how to set up a database using Entity Framework Core (the method OnModelCreating);
+- Learned the DTO and Repository patterns;
 - Repeated work with the MVVM pattern.
 ## 📂 Installation
 1. Clone repositrory to your local machine.
@@ -50,4 +50,15 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
       dotnet run
    ```
 ## 🏛️ Application UI
+ 
+<div align="center">
+   <h3> Login window </h3>
+   <img  src="UiScreenshots/LoginWindow.png" alt="Picture with login window of my application" />
+</div>
 
+<p></p>
+
+<div align="center" width="100%">
+   <h3> Main menu window </h3>
+   <img  src="UiScreenshots/MainMenu.png" alt="Picture with login window of my application" />
+</div>  
