@@ -35,7 +35,7 @@ Fishing company database. The company owns a small fleet of fishing boats. Each 
    3.2. In the quotes (after "DefaultConnection":) write the following string: "Server=localhost;database=yourdbname;pwd=yourpassword;uid=root;port=3306;" (don't forget to enter your data).  
    3.3. If you have another database, than enter connection string for your provider (you can find it in the internet).  
    3.4. And then save file.  
-4. Now we now we need to perform migrations:  
+4. Now we need to perform migrations:  
    4.1. Open project in powershell or Visual Studio.  
    4.2. Complete the following commands:
    ```bash  
